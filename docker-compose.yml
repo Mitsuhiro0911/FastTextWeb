@@ -11,6 +11,9 @@ services:
   db:
     image: mysql:5.7
     volumes:
+      # 初期データを投入するSQLが格納されているdir
+      - ./tool/mysql_init:/docker-entrypoint-initdb.d
+      # 永続化するときにマウントするdir
       - db-store:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=${DB_NAME}
